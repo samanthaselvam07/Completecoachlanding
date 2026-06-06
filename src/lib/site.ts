@@ -61,6 +61,7 @@ export const applicationTiers = [
       "Priority feature input",
       "Early AI check-in analysis access",
       "Founder badge",
+      "Referral commissions up to 30%",
       "Case study opportunity",
     ],
     requirements: [
@@ -86,7 +87,7 @@ export const applicationTiers = [
       "$49/month lifetime founder pricing",
       "Founder badge",
       "Early feature access",
-      "Referral commissions",
+      "Referral commissions up to 20%",
       "Priority onboarding",
       "Private founder community access",
     ],

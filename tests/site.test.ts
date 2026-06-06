@@ -35,6 +35,8 @@ test("founder program offers both early access tiers", () => {
   );
   assert.equal(applicationTiers[0].price, "$29/month");
   assert.equal(applicationTiers[1].price, "$49/month");
+  assert.ok(applicationTiers[0].includes.includes("Referral commissions up to 30%"));
+  assert.ok(applicationTiers[1].includes.includes("Referral commissions up to 20%"));
 });
 
 test("founder program form covers the required application sections", () => {
