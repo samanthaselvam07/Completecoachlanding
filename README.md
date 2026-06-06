@@ -41,7 +41,8 @@ The Early Access form submits to Neon through
 
 1. Create or connect a Neon Postgres database.
 2. Add `DATABASE_URL` to the Vercel project environments.
-3. Run the migration in Neon SQL Editor:
+3. Run the migration in Neon SQL Editor, or let the first production
+   application submission create the same idempotent schema automatically:
 
 ```text
 migrations/001_create_founder_program_applications.sql
