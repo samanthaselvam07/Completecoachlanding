@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SharedNav } from "./shared-nav";
 import { SharedFooter } from "./shared-footer";
+import { PlatformComparisonSection } from "./platform-comparison-section";
 import { founderProgramPath } from "@/lib/site";
 
 function IconBox({ orange }: { orange?: boolean }) {
@@ -236,6 +237,8 @@ export function FeaturesPage() {
           ))}
         </div>
       </section>
+
+      <PlatformComparisonSection />
 
       {/* Closing CTA */}
       <section className="px-4 md:px-[84px] pb-12 max-w-[1440px] mx-auto">

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { platformComparisonGroups } from "../src/components/marketing/platform-comparison-section";
 import { createApplicationNotificationEmail } from "../src/lib/application-notification";
 import { applicationInputSchema } from "../src/lib/application-validation";
 import {
@@ -89,6 +90,28 @@ test("founder program form covers the required application sections", () => {
   assert.equal(
     (checkInIncludesOptions as readonly string[]).includes("Measurements"),
     false,
+  );
+});
+
+test("features page comparison module covers full business platform scope", () => {
+  assert.deepEqual(
+    platformComparisonGroups.map((group) => group.title),
+    [
+      "Coaching Features",
+      "Business Growth Features",
+      "Marketing Suite",
+      "AI & Automation",
+    ],
+  );
+  assert.ok(
+    platformComparisonGroups.some((group) =>
+      group.rows.some(([feature]) => feature === "Revenue Analytics"),
+    ),
+  );
+  assert.ok(
+    platformComparisonGroups.some((group) =>
+      group.rows.some(([feature]) => feature === "Predictive Client Intelligence"),
+    ),
   );
 });
 
