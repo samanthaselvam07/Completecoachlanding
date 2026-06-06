@@ -77,6 +77,11 @@ const phases = [
             detail: "AI-generated nutrition adjustment suggestions based on recent biometric trends, training volume changes, and historical response data for each client.",
             icon: "adjust",
           },
+          {
+            label: "Micronutrient & vitamin analysis",
+            detail: "Track vitamin, mineral, and micronutrient intake over time, then highlight likely gaps, recurring patterns, and opportunities to improve client nutrition quality.",
+            icon: "vitamins",
+          },
         ],
       },
     ],
@@ -150,6 +155,12 @@ const iconMap: Record<string, ReactElement> = {
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <circle cx="10" cy="10" r="2" stroke="#2a8a5b" strokeWidth="1.8"/>
       <path d="M10 4v2M10 14v2M4 10H2M18 10h-2M6.3 6.3 4.9 4.9M15.1 15.1l-1.4-1.4M6.3 13.7l-1.4 1.4M15.1 4.9l-1.4 1.4" stroke="#2a8a5b" strokeWidth="1.8" strokeLinecap="round"/>
+    </svg>
+  ),
+  vitamins: (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M7 3h6M8 3v4.5l-3.2 5.6A2.6 2.6 0 007.1 17h5.8a2.6 2.6 0 002.3-3.9L12 7.5V3" stroke="#f87600" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M7 12h6" stroke="#f87600" strokeWidth="1.8" strokeLinecap="round"/>
     </svg>
   ),
 };
