@@ -180,6 +180,16 @@ function FormSection({
   );
 }
 
+function getTierCardClass(optionValue: ApplicationTier, selectedTier: ApplicationTier) {
+  if (selectedTier !== optionValue) {
+    return "border-[#e5e1dd] bg-[#fbf9f8]";
+  }
+
+  return optionValue === "founding_coach"
+    ? "border-[#f87600] bg-[#fff1e6]"
+    : "border-[#4f40cf] bg-[#f2eeff]";
+}
+
 export function FounderProgramForm() {
   const router = useRouter();
   const [tier, setTier] = useState<ApplicationTier>("design_partner");
@@ -278,9 +288,7 @@ export function FounderProgramForm() {
           {applicationTiers.map((option) => (
             <label
               className={`grid cursor-pointer gap-4 rounded-[24px] border p-5 transition-colors ${
-                tier === option.value
-                  ? "border-[#4f40cf] bg-[#f2eeff]"
-                  : "border-[#e5e1dd] bg-[#fbf9f8]"
+                getTierCardClass(option.value, tier)
               }`}
               key={option.value}
             >
