@@ -72,7 +72,7 @@ export function HomePage() {
             {/* Right — phone mockups */}
             <div className="relative z-10 hidden h-[540px] items-end justify-center gap-6 lg:flex">
 
-              {/* Phone 1 — dark (AI Dashboard) */}
+              {/* Phone 1 — dark (AI Analysis) */}
               <div className="relative mt-auto mb-0" style={{ marginBottom: "0px" }}>
                 <div className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
                   <p className="text-white/80 text-[12px] font-semibold tracking-[1.44px]">EFFICIENCY & INTELLIGENCE</p>
@@ -161,9 +161,9 @@ export function HomePage() {
                     </div>
                   </div>
                 </div>
-                {/* AI Dashboard card */}
+                {/* AI Analysis card */}
                 <div className="absolute -left-6 bottom-[100px] bg-white rounded-[20px] shadow-[0px_12px_20px_0px_rgba(27,28,28,0.12)] px-4 py-3 w-[164px]">
-                  <p className="font-semibold text-[#1b1c1c] text-[14px] leading-[20px]">AI Dashboard</p>
+                  <p className="font-semibold text-[#1b1c1c] text-[14px] leading-[20px]">AI Analysis</p>
                   <p className="text-[#474554] text-[12px] leading-[18px]">Daily review queue</p>
                 </div>
               </div>
