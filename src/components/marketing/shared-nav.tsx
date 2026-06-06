@@ -33,17 +33,10 @@ export function SharedNav({ dark = false }: SharedNavProps) {
     >
       <Link
         href="/"
-        className={`flex items-center gap-3 font-['Plus_Jakarta_Sans',sans-serif] text-[26px] font-bold md:text-[30px] ${
+        className={`font-['Plus_Jakarta_Sans',sans-serif] text-[26px] font-bold md:text-[30px] ${
           dark ? "text-white" : "text-[#1b1c1c]"
         }`}
       >
-        <img
-          alt=""
-          className="size-10 rounded-[10px]"
-          height="40"
-          src="/brand/logo.svg"
-          width="40"
-        />
         <span>Complete Coach</span>
       </Link>
       <div className="hidden items-center gap-8 md:flex">
