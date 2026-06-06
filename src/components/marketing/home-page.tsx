@@ -80,11 +80,85 @@ export function HomePage() {
                 <div className="bg-[#1b1c1c] rounded-[42px] shadow-[0px_22px_40px_0px_rgba(27,28,28,0.18)] w-[250px] h-[520px] relative overflow-hidden">
                   <div className="bg-white rounded-[30px] m-[14px] mt-[14px] h-[492px] relative">
                     <div className="absolute top-[12px] left-1/2 -translate-x-1/2 bg-[#1b1c1c] rounded-full h-[10px] w-[80px]" />
-                    <img
-                      alt="Example AI check-in analysis report on a mobile dashboard"
-                      className="h-full w-full rounded-[30px] object-cover"
-                      src="/images/generated-checkin-report-phone.png"
-                    />
+                    <div className="h-full overflow-hidden rounded-[30px] bg-[#fbf9f8] px-4 pt-[44px]">
+                      <div className="mb-3 rounded-[18px] bg-[#1b1c1c] px-4 py-3 text-white">
+                        <p className="text-[9px] font-semibold tracking-[1px] text-white/60">
+                          COMPLETE COACH EMAIL
+                        </p>
+                        <h3 className="mt-1 font-['Plus_Jakarta_Sans',sans-serif] text-[16px] font-bold leading-[20px]">
+                          Sarah Check-In Analysis
+                        </h3>
+                        <p className="mt-1 text-[10px] leading-[14px] text-white/70">
+                          Sent to Coach Sam • Week 12
+                        </p>
+                      </div>
+
+                      <div className="mb-3 rounded-[18px] bg-white p-3 shadow-[inset_0_0_0_1px_#eee9e5]">
+                        <div className="mb-2 flex items-center justify-between">
+                          <p className="text-[10px] font-semibold tracking-[0.9px] text-[#4f40cf]">
+                            CLIENT SNAPSHOT
+                          </p>
+                          <span className="rounded-full bg-[#ffebe8] px-2 py-1 text-[9px] font-semibold text-[#ba1a1a]">
+                            Action
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="rounded-[12px] bg-[#f2eeff] p-2">
+                            <p className="text-[9px] font-semibold text-[#787586]">Weight</p>
+                            <p className="text-[15px] font-bold leading-[18px] text-[#1b1c1c]">
+                              72.4kg
+                            </p>
+                            <p className="text-[9px] text-[#ba1a1a]">Prev 70.4kg</p>
+                          </div>
+                          <div className="rounded-[12px] bg-[#fff1e6] p-2">
+                            <p className="text-[9px] font-semibold text-[#787586]">Waist</p>
+                            <p className="text-[15px] font-bold leading-[18px] text-[#1b1c1c]">
+                              76cm
+                            </p>
+                            <p className="text-[9px] text-[#753400]">Prev 74.8cm</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="rounded-[16px] bg-white p-3 shadow-[inset_0_0_0_1px_#eee9e5]">
+                          <div className="mb-2 flex items-center justify-between">
+                            <p className="text-[10px] font-semibold text-[#1b1c1c]">
+                              Training progress
+                            </p>
+                            <span className="text-[10px] font-semibold text-[#f87600]">Stalled</span>
+                          </div>
+                          <div className="h-2 overflow-hidden rounded-full bg-[#f0eeec]">
+                            <div className="h-full w-[54%] rounded-full bg-[#f87600]" />
+                          </div>
+                          <p className="mt-2 text-[9px] leading-[13px] text-[#787586]">
+                            Lower-body volume down. RPE rising across final sets.
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="rounded-[16px] bg-white p-3 shadow-[inset_0_0_0_1px_#eee9e5]">
+                            <p className="text-[9px] font-semibold text-[#787586]">Fatigue / stress</p>
+                            <p className="mt-1 text-[15px] font-bold text-[#ba1a1a]">High</p>
+                          </div>
+                          <div className="rounded-[16px] bg-white p-3 shadow-[inset_0_0_0_1px_#eee9e5]">
+                            <p className="text-[9px] font-semibold text-[#787586]">Nutrition</p>
+                            <p className="mt-1 text-[15px] font-bold text-[#f87600]">62%</p>
+                          </div>
+                        </div>
+
+                        <div className="rounded-[16px] bg-white p-3 shadow-[inset_0_0_0_1px_#eee9e5]">
+                          <p className="mb-2 text-[10px] font-semibold text-[#1b1c1c]">
+                            Goals for next week
+                          </p>
+                          <ul className="space-y-1 text-[9px] leading-[13px] text-[#474554]">
+                            <li>• Reduce sodium-heavy meals over weekend.</li>
+                            <li>• Hold calories steady for 7 days.</li>
+                            <li>• Move leg day if sleep drops below 6h.</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 {/* AI Dashboard card */}
