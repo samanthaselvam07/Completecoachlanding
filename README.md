@@ -40,6 +40,24 @@ completecoach.fit      -> landing page
 app.completecoach.fit  -> Complete Coach product app
 ```
 
+Current Vercel preview/production alias:
+
+```text
+https://complete-coach-landing.vercel.app
+```
+
+`completecoach.fit` is currently attached to the existing `complete-coach`
+Vercel project. Before moving the apex domain to this landing project, attach
+`app.completecoach.fit` to the product app and verify authentication callbacks,
+login links, and product redirects against the app subdomain.
+
+The landing Vercel project is `complete-coach-landing`. If automatic Git
+deployments are not active, connect the GitHub repository in Vercel:
+
+```text
+samanthaselvam07/Completecoachlanding
+```
+
 ## Founder Program
 
 All primary CTAs route to `/founder-program`. The application form is currently
