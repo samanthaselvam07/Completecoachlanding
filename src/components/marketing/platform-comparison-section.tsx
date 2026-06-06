@@ -41,21 +41,7 @@ export const platformComparisonGroups = [
 export function PlatformComparisonSection() {
   return (
     <section className="px-6 md:px-[84px] py-10 max-w-[1440px] mx-auto">
-      <div className="rounded-[32px] bg-white px-6 py-10 shadow-[0px_12px_30px_0px_rgba(27,28,28,0.08)] md:px-10">
-        <div className="mx-auto mb-8 max-w-[860px] text-center">
-          <h2 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#1b1c1c] text-[34px] md:text-[48px] leading-[1.08] mb-5">
-            The Only Platform Built To Run Your Entire Coaching Business
-          </h2>
-          <div className="space-y-3 text-[#474554] text-[16px] md:text-[18px] leading-[28px]">
-            <p>Most coaching platforms help you deliver workouts.</p>
-            <p>
-              Complete Coach helps you acquire clients, manage clients,
-              automate operations, analyse performance, grow revenue, and scale
-              your business from a single platform.
-            </p>
-          </div>
-        </div>
-
+      <div>
         <div className="mb-8 rounded-[26px] bg-[#f2eeff] p-5 text-center shadow-[inset_0_0_0_1px_#ddd5ff]">
           <p className="font-semibold text-[#4f40cf] text-[15px] leading-[24px]">
             ✓ Complete Coach leads in 12+ categories where competitors offer
@@ -110,20 +96,6 @@ export function PlatformComparisonSection() {
               ))}
             </div>
           ))}
-        </div>
-
-        <div className="mx-auto mt-8 max-w-[840px] rounded-[28px] bg-[#4f40cf] px-6 py-8 text-center shadow-[0px_14px_30px_0px_rgba(54,32,184,0.16)] md:px-10">
-          <h3 className="font-['Plus_Jakarta_Sans',sans-serif] text-[28px] font-bold leading-[34px] text-white md:text-[36px] md:leading-[42px]">
-            Why pay for 6-8 separate tools when one platform does it all?
-          </h3>
-          <p className="mx-auto mt-4 max-w-[680px] text-[15px] leading-[25px] text-[#e3dfff] md:text-[17px] md:leading-[28px]">
-            Complete Coach combines coaching delivery, CRM, marketing,
-            reporting, AI analysis, automation, and business growth tools into a
-            single operating system built specifically for fitness coaches.
-          </p>
-          <p className="mt-5 text-[16px] font-semibold leading-[24px] text-white">
-            Join the coaches building smarter businesses with Complete Coach.
-          </p>
         </div>
       </div>
     </section>
