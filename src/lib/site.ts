@@ -1,4 +1,5 @@
 export const founderProgramPath = "/founder-program";
+export const founderProgramThankYouPath = "/founder-program/thank-you";
 export const founderProgramCta = "Join Founder Program";
 export const earlyAccessSubmitCta = "Apply for Early Access";
 

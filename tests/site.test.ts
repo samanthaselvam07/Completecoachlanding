@@ -8,12 +8,14 @@ import {
   founderProgramCta,
   founderProgramSections,
   founderProgramPath,
+  founderProgramThankYouPath,
   navLinks,
 } from "../src/lib/site";
 
 test("primary CTA points to the founder program", () => {
   assert.equal(founderProgramCta, "Join Founder Program");
   assert.equal(founderProgramPath, "/founder-program");
+  assert.equal(founderProgramThankYouPath, "/founder-program/thank-you");
 });
 
 test("navigation keeps public marketing routes available", () => {

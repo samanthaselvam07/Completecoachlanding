@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import {
   activeClientOptions,
   applicationTiers,
@@ -11,6 +12,7 @@ import {
   currentToolOptions,
   earlyAccessSubmitCta,
   type ApplicationTier,
+  founderProgramThankYouPath,
   weeklyCheckInTimeOptions,
 } from "@/lib/site";
 
@@ -179,13 +181,10 @@ function FormSection({
 }
 
 export function FounderProgramForm() {
+  const router = useRouter();
   const [tier, setTier] = useState<ApplicationTier>("design_partner");
-  const [confirmation, setConfirmation] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const selectedTier =
-    applicationTiers.find((option) => option.value === tier) ?? applicationTiers[0];
 
   return (
     <form
@@ -194,7 +193,6 @@ export function FounderProgramForm() {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         if (formData.getAll("coachTypes").length === 0) {
-          setConfirmation(null);
           setError("Please select at least one coach type.");
           return;
         }
@@ -255,11 +253,8 @@ export function FounderProgramForm() {
             throw new Error(result?.error ?? "Application could not be submitted.");
           }
 
-          setConfirmation(selectedTier.confirmation);
-          event.currentTarget.reset();
-          setTier("design_partner");
+          router.push(founderProgramThankYouPath);
         } catch (submitError) {
-          setConfirmation(null);
           setError(
             submitError instanceof Error
               ? submitError.message
@@ -476,11 +471,6 @@ export function FounderProgramForm() {
         </p>
       ) : null}
 
-      {confirmation ? (
-        <p className="rounded-[22px] bg-[#e6f9ef] p-5 text-[15px] font-medium leading-[24px] text-[#1f6b46]">
-          {confirmation}
-        </p>
-      ) : null}
     </form>
   );
 }
