@@ -14,6 +14,7 @@ import {
   founderProgramPath,
   founderProgramThankYouPath,
   navLinks,
+  switchTestimonials,
   weeklyCheckInTimeOptions,
 } from "../src/lib/site";
 
@@ -113,6 +114,14 @@ test("features page comparison module covers full business platform scope", () =
       group.rows.some(([feature]) => feature === "Predictive Client Intelligence"),
     ),
   );
+});
+
+test("switch testimonials highlight time savings and single platform workflow", () => {
+  assert.match(switchTestimonials[0].quote, /40 minutes per client/);
+  assert.match(switchTestimonials[0].quote, /20 minutes per client/);
+  assert.equal(switchTestimonials[0].attribution, "Sammi");
+  assert.match(switchTestimonials[1].quote, /one platform/);
+  assert.match(switchTestimonials[1].quote, /multiple screens and tabs/);
 });
 
 test("application validation requires design partner feedback call answer", () => {

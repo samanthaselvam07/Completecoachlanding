@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SharedNav } from "./shared-nav";
 import { SharedFooter } from "./shared-footer";
-import { founderProgramPath } from "@/lib/site";
+import { founderProgramPath, switchTestimonials } from "@/lib/site";
 
 function XDot({ red }: { red?: boolean }) {
   return (
@@ -672,6 +672,21 @@ export function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+          {switchTestimonials.map((testimonial) => (
+            <figure
+              className="rounded-[24px] bg-white/86 p-6 shadow-[0px_10px_28px_0px_rgba(27,28,28,0.05)]"
+              key={testimonial.attribution}
+            >
+              <blockquote className="text-[#1b1c1c] text-[18px] font-semibold leading-[28px]">
+                "{testimonial.quote}"
+              </blockquote>
+              <figcaption className="mt-4 text-[#4f40cf] text-[14px] font-bold leading-[20px]">
+                {testimonial.attribution}
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 

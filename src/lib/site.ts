@@ -3,6 +3,19 @@ export const founderProgramThankYouPath = "/founder-program/thank-you";
 export const founderProgramCta = "Join Founder Program";
 export const earlyAccessSubmitCta = "Apply for Early Access";
 
+export const switchTestimonials = [
+  {
+    quote:
+      "My coaching review time dropped from around 40 minutes per client to 20 minutes per client.",
+    attribution: "Sammi",
+  },
+  {
+    quote:
+      "It was so much easier having everything in one platform instead of bouncing between multiple screens and tabs like usual.",
+    attribution: "Early access coach",
+  },
+] as const;
+
 export const appUrl =
   process.env.NEXT_PUBLIC_APP_URL ?? "https://app.completecoach.fit";
 
