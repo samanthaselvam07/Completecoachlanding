@@ -235,7 +235,7 @@ export function FeaturesPage() {
           <div className="absolute right-[8%] top-[48px] size-[180px] rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, white 0%, transparent 70%)", filter: "blur(36px)", opacity: 0.1 }} />
           {/* Tool tags */}
           <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {["Training apps", "Forms", "Spreadsheets", "Other tools", "Social media planner"].map(tag => (
+            {["Training apps", "Forms & Spreadsheets", "Nutrition apps", "Social Media Planner"].map(tag => (
               <div key={tag} className="bg-white/14 rounded-[17px] px-4 py-1.5">
                 <span className="text-white text-[12px] font-medium">{tag}</span>
               </div>
