@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createApplicationNotificationEmail } from "../src/lib/application-notification";
 import { applicationInputSchema } from "../src/lib/application-validation";
 import {
   applicationTiers,
@@ -14,6 +15,32 @@ import {
   navLinks,
   weeklyCheckInTimeOptions,
 } from "../src/lib/site";
+
+const baseApplication = {
+  tier: "design_partner",
+  fullName: "Sam Coach",
+  email: "sam@example.com",
+  country: "Australia",
+  socialProfile: "https://instagram.com/sam",
+  businessName: "Sam Coaching",
+  coachTypes: ["Online fitness coach"],
+  activeClients: "21-50",
+  coachesOnline: "yes",
+  usesSoftware: "yes",
+  currentTools: ["Google Sheets"],
+  biggestChallenge: "Check-ins take too long.",
+  weeklyCheckInTime: "4-7 hours",
+  switchReason: "It would need to make reviews faster.",
+  collectsCheckIns: "yes_weekly",
+  checkInIncludes: ["Bodyweight"],
+  aiWouldSaveTime: "yes",
+  earlyAccessReason: "I want to help shape the product.",
+  willingToUseWithClients: "yes",
+  willingToGiveFeedback: "yes",
+  openToCaseStudy: "maybe",
+  understandsEarlyAccess: true,
+  agreesToContact: true,
+} as const;
 
 test("primary CTA points to the founder program", () => {
   assert.equal(founderProgramCta, "Join Founder Program");
@@ -35,8 +62,12 @@ test("founder program offers both early access tiers", () => {
   );
   assert.equal(applicationTiers[0].price, "$29/month");
   assert.equal(applicationTiers[1].price, "$49/month");
-  assert.ok(applicationTiers[0].includes.includes("Referral commissions up to 30%"));
-  assert.ok(applicationTiers[1].includes.includes("Referral commissions up to 20%"));
+  assert.ok(
+    applicationTiers[0].includes.includes("Referral commissions up to 30%"),
+  );
+  assert.ok(
+    applicationTiers[1].includes.includes("Referral commissions up to 20%"),
+  );
 });
 
 test("founder program form covers the required application sections", () => {
@@ -62,32 +93,6 @@ test("founder program form covers the required application sections", () => {
 });
 
 test("application validation requires design partner feedback call answer", () => {
-  const baseApplication = {
-    tier: "design_partner",
-    fullName: "Sam Coach",
-    email: "sam@example.com",
-    country: "Australia",
-    socialProfile: "https://instagram.com/sam",
-    businessName: "Sam Coaching",
-    coachTypes: ["Online fitness coach"],
-    activeClients: "21-50",
-    coachesOnline: "yes",
-    usesSoftware: "yes",
-    currentTools: ["Google Sheets"],
-    biggestChallenge: "Check-ins take too long.",
-    weeklyCheckInTime: "4-7 hours",
-    switchReason: "It would need to make reviews faster.",
-    collectsCheckIns: "yes_weekly",
-    checkInIncludes: ["Bodyweight"],
-    aiWouldSaveTime: "yes",
-    earlyAccessReason: "I want to help shape the product.",
-    willingToUseWithClients: "yes",
-    willingToGiveFeedback: "yes",
-    openToCaseStudy: "maybe",
-    understandsEarlyAccess: true,
-    agreesToContact: true,
-  };
-
   assert.equal(applicationInputSchema.safeParse(baseApplication).success, false);
   assert.equal(
     applicationInputSchema.safeParse({
@@ -96,4 +101,24 @@ test("application validation requires design partner feedback call answer", () =
     }).success,
     true,
   );
+});
+
+test("application notification email formats submitted fields safely", () => {
+  const parsed = applicationInputSchema.parse({
+    ...baseApplication,
+    fullName: "Sam <Coach>",
+    willingToAttendFeedbackCalls: "yes",
+  });
+
+  const html = createApplicationNotificationEmail(parsed, {
+    id: 42,
+    submitted_at: new Date("2026-06-06T09:30:00.000Z"),
+  });
+
+  assert.match(html, /NEW FOUNDER PROGRAM APPLICATION/);
+  assert.match(html, /Application #42/);
+  assert.match(html, /Sam &lt;Coach&gt;/);
+  assert.match(html, /Basic Information/);
+  assert.match(html, /AI Check-In Analysis/);
+  assert.doesNotMatch(html, /Sam <Coach>/);
 });

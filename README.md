@@ -32,6 +32,9 @@ pnpm check
 NEXT_PUBLIC_SITE_URL=https://completecoach.fit
 NEXT_PUBLIC_APP_URL=https://app.completecoach.fit
 DATABASE_URL=postgresql://user:password@host/dbname?sslmode=require
+RESEND_API_KEY=re_xxxxxxxxx
+RESEND_FROM_EMAIL="Complete Coach <applications@completecoach.fit>"
+APPLICATION_NOTIFICATION_EMAIL=hello@completecoach.fit
 ```
 
 ## Neon Setup
@@ -50,6 +53,24 @@ migrations/001_create_founder_program_applications.sql
 
 The app uses parameterized inserts through `@neondatabase/serverless`; do not
 commit database URLs or credentials.
+
+## Resend Notifications
+
+When the Early Access form is submitted, the application is saved to Neon first.
+If Resend is configured, the app then sends a readable notification email with
+the submitted fields.
+
+Required Vercel environment variables:
+
+```text
+RESEND_API_KEY
+RESEND_FROM_EMAIL
+APPLICATION_NOTIFICATION_EMAIL
+```
+
+`RESEND_FROM_EMAIL` should use a sender address from a verified Resend domain.
+If any Resend variable is missing, the application still saves successfully and
+the email notification is skipped.
 
 ## Domain Plan
 

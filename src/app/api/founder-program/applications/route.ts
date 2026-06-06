@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { applicationInputSchema } from "@/lib/application-validation";
 import { createFounderProgramApplication } from "@/lib/application-repository";
+import { sendApplicationNotification } from "@/lib/application-notification";
 
 export const runtime = "nodejs";
 
@@ -32,6 +33,15 @@ export async function POST(request: Request) {
     const application = await createFounderProgramApplication(parsed.data, {
       userAgent: request.headers.get("user-agent"),
     });
+
+    try {
+      await sendApplicationNotification(parsed.data, application);
+    } catch (notificationError) {
+      console.error(
+        "Failed to send founder program application notification",
+        notificationError,
+      );
+    }
 
     return NextResponse.json(
       {
