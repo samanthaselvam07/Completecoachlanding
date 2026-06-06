@@ -69,8 +69,16 @@ export function HomePage() {
               </div>
             </div>
 
+            <div className="relative z-10 overflow-hidden rounded-[32px] border border-white/16 bg-white/10 shadow-[0px_22px_44px_0px_rgba(27,28,28,0.18)]">
+              <img
+                alt="AI coaching dashboard in a modern fitness coach workspace"
+                className="aspect-[3/2] h-full w-full object-cover"
+                src="/images/generated-hero.png"
+              />
+            </div>
+
             {/* Right — phone mockups */}
-            <div className="relative hidden lg:flex items-end justify-center gap-6 h-[540px]">
+            <div className="relative hidden items-end justify-center gap-6 h-[540px]">
 
               {/* Phone 1 — dark (AI Dashboard) */}
               <div className="relative mt-auto mb-0" style={{ marginBottom: "0px" }}>
@@ -326,6 +334,13 @@ export function HomePage() {
         <h2 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#1b1c1c] text-[36px] md:text-[48px] leading-[1.12] max-w-[560px] mb-10">
           Not just better coaching.<br />A better business.
         </h2>
+        <div className="mb-6 overflow-hidden rounded-[32px] bg-white shadow-[0px_14px_34px_0px_rgba(27,28,28,0.08)]">
+          <img
+            alt="Business management dashboard for coaching leads, tasks, referrals and planning"
+            className="aspect-[3/2] w-full object-cover md:aspect-[2.4/1]"
+            src="/images/generated-business.png"
+          />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
           {/* Lead pipeline */}
           <div className="md:col-span-6 bg-white/84 rounded-[28px] shadow-[0px_10px_28px_0px_rgba(27,28,28,0.06)] p-8">

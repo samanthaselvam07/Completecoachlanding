@@ -318,6 +318,18 @@ export function RoadmapPage() {
                         </div>
                       </div>
 
+                      {feature.title === "AI Nutrition Insights" ? (
+                        <div className="bg-white px-6 pt-6">
+                          <div className="overflow-hidden rounded-[24px] bg-[#fbf9f8] shadow-[inset_0_0_0_1px_#f0eeec]">
+                            <img
+                              alt="Nutrition insights dashboard with macro, micronutrient and vitamin analysis"
+                              className="aspect-[3/2] w-full object-cover md:aspect-[2.4/1]"
+                              src="/images/generated-nutrition.png"
+                            />
+                          </div>
+                        </div>
+                      ) : null}
+
                       {/* Prediction cards */}
                       <div className="bg-white p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         {feature.predictions.map((pred) => (

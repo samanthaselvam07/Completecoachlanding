@@ -45,8 +45,16 @@ export function FeaturesPage() {
               </div>
             </div>
 
+            <div className="relative z-10 overflow-hidden rounded-[32px] bg-[#fbf9f8] shadow-[0px_18px_38px_0px_rgba(27,28,28,0.1)]">
+              <img
+                alt="AI check-in analysis dashboard with client progress, adherence and insight cards"
+                className="aspect-[4/3] h-full w-full object-cover"
+                src="/images/generated-checkins.png"
+              />
+            </div>
+
             {/* Right — phone mockups */}
-            <div className="relative hidden lg:flex items-start justify-center gap-6 h-[580px]">
+            <div className="relative hidden items-start justify-center gap-6 h-[580px]">
               {/* Phone 1 — dark */}
               <div className="relative mt-8">
                 <div className="bg-[#1b1c1c] rounded-[42px] shadow-[0px_22px_40px_0px_rgba(27,28,28,0.18)] w-[238px] h-[482px] relative overflow-hidden">
