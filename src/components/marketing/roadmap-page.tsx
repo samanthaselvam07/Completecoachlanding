@@ -89,6 +89,21 @@ const phases = [
   },
 ];
 
+const corePlatformItems = phases[0].items ?? [];
+
+const founderProgramFocus = [
+  {
+    title: "AI Check-In Analysis",
+    description:
+      "Founder Program coaches will help shape how Complete Coach reviews client check-ins, surfaces risk signals, highlights progress trends, and turns weekly data into faster coaching decisions.",
+  },
+  {
+    title: "Business Management Features",
+    description:
+      "We'll use founder feedback to refine the systems that help coaches manage leads, onboarding, pipelines, tasks, client operations, and the business side of scaling a coaching company.",
+  },
+] as const;
+
 const iconMap: Record<string, ReactElement> = {
   churn: (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -170,6 +185,64 @@ export function RoadmapPage() {
         <p className="text-[#474554] text-[18px] leading-[30px] max-w-[580px] mx-auto">
           A transparent view into the intelligence we're adding to Complete Coach — so you can plan your business around what's coming.
         </p>
+      </section>
+
+      {/* Founder Program context */}
+      <section className="px-6 pb-14 max-w-[1100px] mx-auto">
+        <div className="rounded-[34px] bg-white px-6 py-8 shadow-[0px_12px_28px_0px_rgba(27,28,28,0.08)] md:px-10 md:py-10">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <div className="mb-4 inline-flex items-center rounded-[18px] bg-[#e6f9ef] px-4 py-2">
+                <span className="text-[12px] font-semibold tracking-[1.44px] text-[#2a8a5b]">
+                  FOUNDER PROGRAM ROADMAP
+                </span>
+              </div>
+              <h2 className="mb-4 font-['Plus_Jakarta_Sans',sans-serif] text-[30px] font-extrabold leading-[1.08] text-[#1b1c1c] md:text-[40px]">
+                Core Platform is included from the start.
+              </h2>
+              <p className="text-[16px] leading-[27px] text-[#474554]">
+                Founder Program members get access to everything in the Core
+                Platform module. The founder build process will focus on
+                shaping the AI Check-In Analysis layer and the business
+                management features that help coaches operate at scale.
+              </p>
+            </div>
+
+            <div className="grid gap-5">
+              <div className="rounded-[24px] bg-[#fbf9f8] p-5 shadow-[inset_0_0_0_1px_#f0eeec]">
+                <h3 className="mb-3 font-['Plus_Jakarta_Sans',sans-serif] text-[20px] font-bold leading-[26px] text-[#1b1c1c]">
+                  Included in Core Platform
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {corePlatformItems.map((item) => (
+                    <span
+                      className="rounded-[12px] bg-white px-3 py-2 text-[13px] font-medium text-[#474554] shadow-[inset_0_0_0_1px_#ebe7e4]"
+                      key={item}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                {founderProgramFocus.map((item) => (
+                  <div
+                    className="rounded-[24px] bg-[#f2eeff] p-5 shadow-[inset_0_0_0_1px_#ddd5ff]"
+                    key={item.title}
+                  >
+                    <h3 className="mb-2 font-['Plus_Jakarta_Sans',sans-serif] text-[19px] font-bold leading-[25px] text-[#1b1c1c]">
+                      {item.title}
+                    </h3>
+                    <p className="text-[14px] leading-[23px] text-[#474554]">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Timeline track */}
