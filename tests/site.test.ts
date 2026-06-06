@@ -1,8 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  applicationTiers,
+  checkInIncludesOptions,
+  coachTypeOptions,
   founderProgramCta,
-  founderProgramFields,
+  founderProgramSections,
   founderProgramPath,
   navLinks,
 } from "../src/lib/site";
@@ -19,8 +22,23 @@ test("navigation keeps public marketing routes available", () => {
   );
 });
 
-test("founder program form has the initial application fields", () => {
-  assert.ok(founderProgramFields.includes("Full name"));
-  assert.ok(founderProgramFields.includes("Email"));
-  assert.ok(founderProgramFields.length >= 5);
+test("founder program offers both early access tiers", () => {
+  assert.deepEqual(
+    applicationTiers.map((tier) => tier.value),
+    ["design_partner", "founding_coach"],
+  );
+  assert.equal(applicationTiers[0].price, "$29/month");
+  assert.equal(applicationTiers[1].price, "$49/month");
+});
+
+test("founder program form covers the required application sections", () => {
+  assert.deepEqual(founderProgramSections, [
+    "Basic Information",
+    "Coaching Business Details",
+    "Pain Points",
+    "AI Check-In Analysis",
+    "Commitment",
+  ]);
+  assert.ok(coachTypeOptions.includes("Online fitness coach"));
+  assert.ok(checkInIncludesOptions.includes("Progress photos"));
 });
