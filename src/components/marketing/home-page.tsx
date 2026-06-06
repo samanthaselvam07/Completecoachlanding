@@ -69,16 +69,8 @@ export function HomePage() {
               </div>
             </div>
 
-            <div className="relative z-10 overflow-hidden rounded-[32px] border border-white/16 bg-white/10 shadow-[0px_22px_44px_0px_rgba(27,28,28,0.18)]">
-              <img
-                alt="AI coaching dashboard in a modern fitness coach workspace"
-                className="aspect-[3/2] h-full w-full object-cover"
-                src="/images/generated-hero.png"
-              />
-            </div>
-
             {/* Right — phone mockups */}
-            <div className="relative hidden items-end justify-center gap-6 h-[540px]">
+            <div className="relative z-10 hidden h-[540px] items-end justify-center gap-6 lg:flex">
 
               {/* Phone 1 — dark (AI Dashboard) */}
               <div className="relative mt-auto mb-0" style={{ marginBottom: "0px" }}>
@@ -88,20 +80,11 @@ export function HomePage() {
                 <div className="bg-[#1b1c1c] rounded-[42px] shadow-[0px_22px_40px_0px_rgba(27,28,28,0.18)] w-[250px] h-[520px] relative overflow-hidden">
                   <div className="bg-white rounded-[30px] m-[14px] mt-[14px] h-[492px] relative">
                     <div className="absolute top-[12px] left-1/2 -translate-x-1/2 bg-[#1b1c1c] rounded-full h-[10px] w-[80px]" />
-                    <div className="px-4 pt-[56px] space-y-3">
-                      <div className="bg-[rgba(79,64,207,0.12)] h-[18px] rounded-[10px] w-[160px]" />
-                      <div className="bg-[rgba(248,118,0,0.14)] h-[12px] rounded-[10px] w-[120px]" />
-                      {[1,2,3,4].map(i => (
-                        <div key={i} className="bg-[#f5f3f3] rounded-[18px] h-[58px] flex items-center px-3 gap-2 relative">
-                          <div className="flex-1">
-                            <div className="bg-[rgba(27,28,28,0.08)] h-[10px] rounded-full w-24 mb-2" />
-                            <div className="bg-[rgba(120,117,134,0.12)] h-[8px] rounded-full w-[124px]" />
-                          </div>
-                          <div className="bg-[rgba(79,64,207,0.22)] rounded-[13px] size-[26px] flex-shrink-0" />
-                        </div>
-                      ))}
-                      <div className="bg-[rgba(79,64,207,0.16)] h-[20px] rounded-full w-full" />
-                    </div>
+                    <img
+                      alt="Example AI check-in analysis report on a mobile dashboard"
+                      className="h-full w-full rounded-[30px] object-cover"
+                      src="/images/generated-checkin-report-phone.png"
+                    />
                   </div>
                 </div>
                 {/* AI Dashboard card */}
@@ -119,19 +102,59 @@ export function HomePage() {
                 <div className="bg-[#f4f3f8] rounded-[42px] shadow-[0px_22px_40px_0px_rgba(27,28,28,0.18)] w-[250px] h-[520px] relative overflow-hidden">
                   <div className="bg-[#fcfbff] rounded-[30px] m-[14px] mt-[14px] h-[492px] relative">
                     <div className="absolute top-[12px] left-1/2 -translate-x-1/2 bg-[#d6d2ea] rounded-full h-[10px] w-[80px]" />
-                    <div className="px-4 pt-[56px] space-y-3">
-                      <div className="bg-[rgba(79,64,207,0.12)] h-[18px] rounded-[10px] w-[160px]" />
-                      <div className="bg-[rgba(248,118,0,0.14)] h-[12px] rounded-[10px] w-[120px]" />
-                      {[1,2,3,4].map(i => (
-                        <div key={i} className="bg-[#f5f3f3] rounded-[18px] h-[58px] flex items-center px-3 gap-2">
-                          <div className="flex-1">
-                            <div className="bg-[rgba(27,28,28,0.08)] h-[10px] rounded-full w-24 mb-2" />
-                            <div className="bg-[rgba(120,117,134,0.12)] h-[8px] rounded-full w-[124px]" />
-                          </div>
-                          <div className="bg-[rgba(248,118,0,0.22)] rounded-[13px] size-[26px] flex-shrink-0" />
+                    <div className="px-3 pt-[50px]">
+                      <div className="mb-3 flex items-center gap-2">
+                        <div className="h-[14px] w-[108px] rounded-full bg-[rgba(248,118,0,0.18)]" />
+                        <div className="h-[14px] w-[58px] rounded-full bg-[rgba(79,64,207,0.14)]" />
+                      </div>
+                      <div className="overflow-hidden rounded-[16px] border border-[#d9d5e6] bg-white shadow-[0px_6px_16px_0px_rgba(27,28,28,0.08)]">
+                        <div className="grid grid-cols-5 bg-[#edeaf5] text-center text-[8px] font-semibold leading-[18px] text-[#787586]">
+                          {["A", "B", "C", "D", "E"].map((column) => (
+                            <span className="border-r border-[#d9d5e6] last:border-r-0" key={column}>
+                              {column}
+                            </span>
+                          ))}
                         </div>
-                      ))}
-                      <div className="bg-[rgba(248,118,0,0.16)] h-[20px] rounded-full w-full" />
+                        {[
+                          ["82", "7.4", "12", "145", "68"],
+                          ["81", "6.9", "11", "132", "72"],
+                          ["83", "8.1", "14", "151", "65"],
+                          ["80", "7.2", "10", "126", "70"],
+                          ["84", "8.4", "16", "164", "63"],
+                          ["82", "7.8", "13", "139", "66"],
+                          ["79", "6.7", "9", "118", "74"],
+                          ["85", "8.9", "18", "172", "61"],
+                          ["81", "7.1", "12", "128", "69"],
+                          ["83", "8.2", "15", "156", "64"],
+                          ["80", "6.8", "11", "121", "73"],
+                          ["84", "8.6", "17", "168", "62"],
+                        ].map((row, rowIndex) => (
+                          <div
+                            className="grid grid-cols-5 text-center text-[9px] font-medium leading-[24px] text-[#474554]"
+                            key={rowIndex}
+                          >
+                            {row.map((cell, cellIndex) => (
+                              <span
+                                className={`border-r border-t border-[#e7e3ef] last:border-r-0 ${
+                                  (rowIndex + cellIndex) % 5 === 0
+                                    ? "bg-[#fff1e6] text-[#753400]"
+                                    : (rowIndex + cellIndex) % 4 === 0
+                                      ? "bg-[#f2eeff] text-[#4f40cf]"
+                                      : "bg-white"
+                                }`}
+                                key={`${rowIndex}-${cellIndex}`}
+                              >
+                                {cell}
+                              </span>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="mt-3 grid grid-cols-3 gap-2">
+                        <div className="h-[36px] rounded-[12px] bg-[#fff1e6]" />
+                        <div className="h-[36px] rounded-[12px] bg-[#f2eeff]" />
+                        <div className="h-[36px] rounded-[12px] bg-[#f5f3f3]" />
+                      </div>
                     </div>
                   </div>
                 </div>
