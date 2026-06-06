@@ -182,6 +182,7 @@ export function FounderProgramForm() {
   const [tier, setTier] = useState<ApplicationTier>("design_partner");
   const [confirmation, setConfirmation] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const selectedTier =
     applicationTiers.find((option) => option.value === tier) ?? applicationTiers[0];
@@ -189,7 +190,7 @@ export function FounderProgramForm() {
   return (
     <form
       className="grid gap-6"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         if (formData.getAll("coachTypes").length === 0) {
@@ -197,8 +198,76 @@ export function FounderProgramForm() {
           setError("Please select at least one coach type.");
           return;
         }
+
+        setIsSubmitting(true);
         setError(null);
-        setConfirmation(selectedTier.confirmation);
+
+        const stringValue = (key: string) => String(formData.get(key) ?? "");
+        const optionalStringValue = (key: string) => {
+          const value = stringValue(key).trim();
+          return value.length > 0 ? value : undefined;
+        };
+
+        const payload = {
+          tier,
+          fullName: stringValue("fullName"),
+          email: stringValue("email"),
+          phone: optionalStringValue("phone"),
+          country: stringValue("country"),
+          socialProfile: stringValue("socialProfile"),
+          website: optionalStringValue("website"),
+          businessName: stringValue("businessName"),
+          coachTypes: formData.getAll("coachTypes").map(String),
+          activeClients: stringValue("activeClients"),
+          coachesOnline: stringValue("coachesOnline"),
+          usesSoftware: stringValue("usesSoftware"),
+          currentTools: formData.getAll("currentTools").map(String),
+          biggestChallenge: stringValue("biggestChallenge"),
+          weeklyCheckInTime: stringValue("weeklyCheckInTime"),
+          switchReason: stringValue("switchReason"),
+          collectsCheckIns: stringValue("collectsCheckIns"),
+          checkInIncludes: formData.getAll("checkInIncludes").map(String),
+          aiWouldSaveTime: stringValue("aiWouldSaveTime"),
+          earlyAccessReason: stringValue("earlyAccessReason"),
+          willingToUseWithClients: stringValue("willingToUseWithClients"),
+          willingToGiveFeedback: stringValue("willingToGiveFeedback"),
+          willingToAttendFeedbackCalls:
+            tier === "design_partner"
+              ? stringValue("willingToAttendFeedbackCalls")
+              : undefined,
+          openToCaseStudy: stringValue("openToCaseStudy"),
+          understandsEarlyAccess:
+            formData.get("understandsEarlyAccess") === "on",
+          agreesToContact: formData.get("agreesToContact") === "on",
+        };
+
+        try {
+          const response = await fetch("/api/founder-program/applications", {
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+          });
+
+          if (!response.ok) {
+            const result = (await response.json().catch(() => null)) as {
+              error?: string;
+            } | null;
+            throw new Error(result?.error ?? "Application could not be submitted.");
+          }
+
+          setConfirmation(selectedTier.confirmation);
+          event.currentTarget.reset();
+          setTier("design_partner");
+        } catch (submitError) {
+          setConfirmation(null);
+          setError(
+            submitError instanceof Error
+              ? submitError.message
+              : "Application could not be submitted.",
+          );
+        } finally {
+          setIsSubmitting(false);
+        }
       }}
     >
       <section className="grid gap-5 rounded-[28px] bg-white p-5 shadow-[0px_12px_28px_0px_rgba(27,28,28,0.08)] md:p-7">
@@ -394,10 +463,11 @@ export function FounderProgramForm() {
       </FormSection>
 
       <button
-        className="h-[58px] rounded-[29px] bg-[#4f40cf] px-8 text-[15px] font-semibold text-white shadow-[0px_10px_24px_0px_rgba(79,64,207,0.16)] transition-colors hover:bg-[#3d31a8]"
+        className="h-[58px] rounded-[29px] bg-[#4f40cf] px-8 text-[15px] font-semibold text-white shadow-[0px_10px_24px_0px_rgba(79,64,207,0.16)] transition-colors hover:bg-[#3d31a8] disabled:cursor-not-allowed disabled:opacity-70"
+        disabled={isSubmitting}
         type="submit"
       >
-        {earlyAccessSubmitCta}
+        {isSubmitting ? "Submitting..." : earlyAccessSubmitCta}
       </button>
 
       {error ? (

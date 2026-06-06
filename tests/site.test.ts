@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { applicationInputSchema } from "../src/lib/application-validation";
 import {
   applicationTiers,
   checkInIncludesOptions,
@@ -41,4 +42,41 @@ test("founder program form covers the required application sections", () => {
   ]);
   assert.ok(coachTypeOptions.includes("Online fitness coach"));
   assert.ok(checkInIncludesOptions.includes("Progress photos"));
+});
+
+test("application validation requires design partner feedback call answer", () => {
+  const baseApplication = {
+    tier: "design_partner",
+    fullName: "Sam Coach",
+    email: "sam@example.com",
+    country: "Australia",
+    socialProfile: "https://instagram.com/sam",
+    businessName: "Sam Coaching",
+    coachTypes: ["Online fitness coach"],
+    activeClients: "21-50",
+    coachesOnline: "yes",
+    usesSoftware: "yes",
+    currentTools: ["Google Sheets"],
+    biggestChallenge: "Check-ins take too long.",
+    weeklyCheckInTime: "4-7 hours",
+    switchReason: "It would need to make reviews faster.",
+    collectsCheckIns: "yes_weekly",
+    checkInIncludes: ["Bodyweight"],
+    aiWouldSaveTime: "yes",
+    earlyAccessReason: "I want to help shape the product.",
+    willingToUseWithClients: "yes",
+    willingToGiveFeedback: "yes",
+    openToCaseStudy: "maybe",
+    understandsEarlyAccess: true,
+    agreesToContact: true,
+  };
+
+  assert.equal(applicationInputSchema.safeParse(baseApplication).success, false);
+  assert.equal(
+    applicationInputSchema.safeParse({
+      ...baseApplication,
+      willingToAttendFeedbackCalls: "yes",
+    }).success,
+    true,
+  );
 });

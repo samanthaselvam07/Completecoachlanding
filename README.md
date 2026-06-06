@@ -31,7 +31,24 @@ pnpm check
 ```bash
 NEXT_PUBLIC_SITE_URL=https://completecoach.fit
 NEXT_PUBLIC_APP_URL=https://app.completecoach.fit
+DATABASE_URL=postgresql://user:password@host/dbname?sslmode=require
 ```
+
+## Neon Setup
+
+The Early Access form submits to Neon through
+`/api/founder-program/applications`.
+
+1. Create or connect a Neon Postgres database.
+2. Add `DATABASE_URL` to the Vercel project environments.
+3. Run the migration in Neon SQL Editor:
+
+```text
+migrations/001_create_founder_program_applications.sql
+```
+
+The app uses parameterized inserts through `@neondatabase/serverless`; do not
+commit database URLs or credentials.
 
 ## Domain Plan
 
