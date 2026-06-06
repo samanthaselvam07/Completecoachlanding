@@ -122,6 +122,7 @@ test("switch testimonials highlight time savings and single platform workflow", 
   assert.equal(switchTestimonials[0].attribution, "Sammi");
   assert.match(switchTestimonials[1].quote, /one platform/);
   assert.match(switchTestimonials[1].quote, /multiple screens and tabs/);
+  assert.equal(switchTestimonials[1].attribution, "Din");
 });
 
 test("application validation requires design partner feedback call answer", () => {

@@ -12,7 +12,7 @@ export const switchTestimonials = [
   {
     quote:
       "It was so much easier having everything in one platform instead of bouncing between multiple screens and tabs like usual.",
-    attribution: "Early access coach",
+    attribution: "Din",
   },
 ] as const;
 
