@@ -516,33 +516,85 @@ export function HomePage() {
         <h2 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#1b1c1c] text-[36px] md:text-[48px] leading-[1.12] max-w-[560px] mb-10">
           Not just better coaching.<br />A better business.
         </h2>
-        <div className="mb-6 overflow-hidden rounded-[32px] bg-white shadow-[0px_14px_34px_0px_rgba(27,28,28,0.08)]">
-          <img
-            alt="Business management dashboard for coaching leads, tasks, referrals and planning"
-            className="aspect-[3/2] w-full object-cover md:aspect-[2.4/1]"
-            src="/images/generated-business.png"
-          />
-        </div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
           {/* Lead pipeline */}
           <div className="md:col-span-6 bg-white/84 rounded-[28px] shadow-[0px_10px_28px_0px_rgba(27,28,28,0.06)] p-8">
             <h3 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#1b1c1c] text-[28px] leading-[32px] mb-2">Lead pipeline</h3>
             <p className="text-[#474554] text-[15px] leading-[24px] mb-6 max-w-[320px]">Visual CRM built for health and fitness coaching conversions.</p>
             <div className="flex gap-3">
-              {[1,2,3,4].map(i => (
-                <div key={i} className="bg-[#f5f3f3] rounded-[18px] h-[92px] flex-1" />
+              {[
+                { stage: "New lead", count: "18", color: "bg-[#f2eeff] text-[#4f40cf]" },
+                { stage: "Qualified", count: "9", color: "bg-[#fff1e6] text-[#753400]" },
+                { stage: "Call booked", count: "6", color: "bg-[#e6f9ef] text-[#1f6b46]" },
+                { stage: "Won", count: "4", color: "bg-[#f5f3f3] text-[#474554]" },
+              ].map((stage) => (
+                <div key={stage.stage} className="flex min-h-[112px] flex-1 flex-col justify-between rounded-[18px] bg-[#f5f3f3] p-3">
+                  <div>
+                    <p className="text-[12px] font-semibold leading-[16px] text-[#1b1c1c]">{stage.stage}</p>
+                    <p className="mt-1 text-[11px] text-[#787586]">{stage.count} prospects</p>
+                  </div>
+                  <div className="space-y-1.5">
+                    {[0, 1].map((item) => (
+                      <div className={`h-5 rounded-[8px] ${stage.color}`} key={item} />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
           {/* Financial insights */}
-          <div className="md:col-span-3 bg-[#4f40cf] rounded-[28px] shadow-[0px_10px_24px_0px_rgba(54,32,184,0.16)] p-8 flex flex-col justify-between">
+          <div className="md:col-span-3 bg-[#4f40cf] rounded-[28px] shadow-[0px_10px_24px_0px_rgba(54,32,184,0.16)] p-6 flex flex-col justify-between gap-5">
             <h3 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-white text-[28px] leading-[34px]">Financial insights</h3>
-            <p className="text-[#e3dfff] text-[15px] leading-[24px]">Real-time revenue, churn, and projection data.</p>
+            <div className="rounded-[20px] bg-white/12 p-4">
+              <div className="mb-3 flex items-end justify-between gap-2">
+                <div>
+                  <p className="text-[11px] font-semibold tracking-[1px] text-white/60">MONTHLY REVENUE</p>
+                  <p className="mt-1 font-['Plus_Jakarta_Sans',sans-serif] text-[24px] font-extrabold leading-none text-white">$18.4k</p>
+                </div>
+                <span className="rounded-full bg-[#e6f9ef] px-2 py-1 text-[11px] font-semibold text-[#1f6b46]">+12%</span>
+              </div>
+              <div className="flex h-[76px] items-end gap-1.5">
+                {[34, 48, 42, 58, 64, 74, 68, 86].map((height, index) => (
+                  <div
+                    className="flex-1 rounded-t-[7px]"
+                    key={index}
+                    style={{
+                      height: `${height}%`,
+                      background: index % 2 === 0 ? "rgba(255,255,255,0.42)" : "#f87600",
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+            <p className="text-[#e3dfff] text-[15px] leading-[24px]">Revenue, churn, and projection reports in one glance.</p>
           </div>
           {/* Team management */}
           <div className="md:col-span-3 bg-white/84 rounded-[28px] shadow-[0px_10px_28px_0px_rgba(27,28,28,0.06)] p-6">
             <h3 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#1b1c1c] text-[26px] leading-[30px] mb-2">Team management</h3>
-            <p className="text-[#474554] text-[14px] leading-[22px]">Hire and manage additional coaches while keeping quality control high.</p>
+            <p className="text-[#474554] text-[14px] leading-[22px] mb-4">Coach capacity and weekly earnings at a glance.</p>
+            <div className="space-y-2">
+              {[
+                { name: "Mia", capacity: "24/30", earnings: "$2.8k" },
+                { name: "Jordan", capacity: "18/25", earnings: "$2.1k" },
+                { name: "Ella", capacity: "29/30", earnings: "$3.4k" },
+              ].map((coach) => (
+                <div className="rounded-[16px] bg-[#fbf9f8] p-3 shadow-[inset_0_0_0_1px_#f0eeec]" key={coach.name}>
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-[13px] font-bold text-[#1b1c1c]">{coach.name}</p>
+                    <p className="text-[12px] font-semibold text-[#4f40cf]">{coach.earnings}</p>
+                  </div>
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="h-2 flex-1 overflow-hidden rounded-full bg-[#e5e1dd]">
+                      <div
+                        className="h-full rounded-full bg-[#f87600]"
+                        style={{ width: coach.capacity.startsWith("29") ? "96%" : coach.capacity.startsWith("24") ? "80%" : "72%" }}
+                      />
+                    </div>
+                    <span className="text-[11px] font-semibold text-[#787586]">{coach.capacity}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           {/* Content workflow */}
           <div className="md:col-span-9 bg-[#f87600] rounded-[28px] shadow-[0px_10px_28px_0px_rgba(248,118,0,0.16)] p-8">
@@ -551,10 +603,21 @@ export function HomePage() {
                 <h3 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-white text-[28px] leading-[32px] mb-2">Content workflow</h3>
                 <p className="text-[#fff3eb] text-[15px] leading-[22px] max-w-[280px]">Store, schedule and distribute your educational content instantly.</p>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                {["Videos", "Articles", "Templates", "Guides"].map(tag => (
-                  <div key={tag} className="bg-white/18 rounded-[15px] px-4 py-1.5 text-center">
-                    <span className="text-white text-[12px] font-medium">{tag}</span>
+              <div className="grid min-w-[280px] flex-1 grid-cols-2 gap-3 md:grid-cols-4">
+                {[
+                  { step: "1", label: "Content idea" },
+                  { step: "2", label: "Content generation" },
+                  { step: "3", label: "Content scheduled" },
+                  { step: "4", label: "Content posted" },
+                ].map((item) => (
+                  <div key={item.step} className="rounded-[18px] bg-white/18 p-4">
+                    <span className="grid size-7 place-items-center rounded-full bg-white text-[12px] font-bold text-[#f87600]">
+                      {item.step}
+                    </span>
+                    <p className="mt-3 text-[13px] font-semibold leading-[17px] text-white">{item.label}</p>
+                    <div className="mt-3 h-2 rounded-full bg-white/28">
+                      <div className="h-full w-[72%] rounded-full bg-white" />
+                    </div>
                   </div>
                 ))}
               </div>
