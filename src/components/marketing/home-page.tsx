@@ -256,7 +256,7 @@ export function HomePage() {
             {/* Left */}
             <div>
               <div className="inline-flex items-center bg-[#f2eeff] rounded-[18px] px-4 py-2 mb-6">
-                <span className="text-[#4f40cf] text-[12px] font-semibold tracking-[1.44px]">CORE FEATURE</span>
+                <span className="text-[#4f40cf] text-[12px] font-semibold tracking-[1.44px]">AI CHECK-IN ANALYSIS</span>
               </div>
               <h2 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#1b1c1c] text-[40px] md:text-[54px] leading-[1.05] mb-6">
                 Every check-in.<br />Broken down.<br />Analysed.
@@ -297,27 +297,112 @@ export function HomePage() {
             </div>
             {/* Right — card visuals */}
             <div className="space-y-5">
-              <div className="bg-white rounded-[30px] shadow-[0px_14px_28px_0px_rgba(27,28,28,0.08)] p-6 relative">
-                <div className="bg-[#f6f4ff] rounded-[24px] p-5 space-y-3">
-                  {[188, 240, 292, 344, 396].map((w, i) => (
-                    <div key={i} className="h-[16px] rounded-full" style={{ width: `${Math.min(w, 400)}px`, maxWidth: "100%", background: i % 2 === 0 ? "rgba(79,64,207,0.18)" : "rgba(248,118,0,0.18)" }} />
-                  ))}
-                </div>
-                <div className="absolute top-4 right-4 bg-[#4f40cf] rounded-[18px] shadow-[0px_10px_20px_0px_rgba(54,32,184,0.18)] px-4 py-3">
-                  <p className="text-white text-[13px] font-semibold tracking-[1.04px]">URGENT ACTION</p>
+              <div className="bg-white rounded-[30px] shadow-[0px_14px_28px_0px_rgba(27,28,28,0.08)] p-6">
+                <div className="bg-[#f6f4ff] rounded-[24px] p-5">
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-[#4f40cf] text-[12px] font-semibold tracking-[1.04px]">
+                        URGENT ACTION
+                      </p>
+                      <h3 className="mt-1 font-['Plus_Jakarta_Sans',sans-serif] text-[24px] font-bold leading-[30px] text-[#1b1c1c]">
+                        Sarah
+                      </h3>
+                    </div>
+                    <span className="rounded-full bg-[#ffebe8] px-3 py-1 text-[12px] font-semibold text-[#ba1a1a]">
+                      Review now
+                    </span>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-[18px] bg-white p-4 shadow-[inset_0_0_0_1px_#e5e1dd]">
+                      <p className="text-[12px] font-semibold tracking-[1.1px] text-[#787586]">
+                        WEIGHT SPIKE
+                      </p>
+                      <p className="mt-2 font-['Plus_Jakarta_Sans',sans-serif] text-[32px] font-extrabold leading-none text-[#ba1a1a]">
+                        +2kg
+                      </p>
+                    </div>
+                    <div className="rounded-[18px] bg-white p-4 shadow-[inset_0_0_0_1px_#e5e1dd]">
+                      <p className="text-[12px] font-semibold tracking-[1.1px] text-[#787586]">
+                        NUTRITION
+                      </p>
+                      <p className="mt-2 font-['Plus_Jakarta_Sans',sans-serif] text-[28px] font-extrabold leading-none text-[#f87600]">
+                        Low compliance
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 rounded-[18px] bg-white p-4 shadow-[inset_0_0_0_1px_#e5e1dd]">
+                    <div className="mb-2 flex items-center justify-between text-[12px] font-semibold text-[#787586]">
+                      <span>Action priority</span>
+                      <span>High</span>
+                    </div>
+                    <div className="h-3 overflow-hidden rounded-full bg-[#f0eeec]">
+                      <div className="h-full w-[82%] rounded-full bg-[#f87600]" />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="bg-white rounded-[30px] shadow-[0px_14px_28px_0px_rgba(27,28,28,0.08)] p-6 relative">
-                <div className="bg-[#fff4ec] rounded-[24px] p-5 space-y-3">
-                  {[1,2,3,4].map((i) => (
-                    <div key={i} className="flex gap-4">
-                      <div className="bg-[rgba(248,118,0,0.16)] h-[18px] rounded-full w-[160px]" />
-                      <div className="bg-[rgba(79,64,207,0.1)] h-[18px] rounded-full flex-1" />
+              <div className="bg-white rounded-[30px] shadow-[0px_14px_28px_0px_rgba(27,28,28,0.08)] p-6">
+                <div className="bg-[#fff4ec] rounded-[24px] p-5">
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p className="text-[#f87600] text-[12px] font-semibold tracking-[1.04px]">
+                        HIGH COMPLIANCE
+                      </p>
+                      <h3 className="mt-1 font-['Plus_Jakarta_Sans',sans-serif] text-[24px] font-bold leading-[30px] text-[#1b1c1c]">
+                        Clients on track
+                      </h3>
                     </div>
-                  ))}
-                </div>
-                <div className="absolute bottom-4 left-6 bg-[#f87600] rounded-[18px] shadow-[0px_10px_20px_0px_rgba(248,118,0,0.18)] px-4 py-3">
-                  <p className="text-white text-[13px] font-semibold tracking-[1.04px]">HIGH COMPLIANCE</p>
+                    <span className="rounded-full bg-[#e6f9ef] px-3 py-1 text-[12px] font-semibold text-[#1f6b46]">
+                      90%+
+                    </span>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { name: "Amelia", training: "96", nutrition: "94", recovery: "92" },
+                      { name: "Marcus", training: "93", nutrition: "91", recovery: "95" },
+                      { name: "Priya", training: "98", nutrition: "90", recovery: "94" },
+                    ].map((client) => (
+                      <div
+                        className="rounded-[18px] bg-white p-4 shadow-[inset_0_0_0_1px_#eadfd7]"
+                        key={client.name}
+                      >
+                        <div className="mb-3 flex items-center justify-between gap-3">
+                          <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[17px] font-bold leading-[22px] text-[#1b1c1c]">
+                            {client.name}
+                          </p>
+                          <span className="rounded-full bg-[#e6f9ef] px-2.5 py-1 text-[12px] font-semibold text-[#1f6b46]">
+                            On track
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2 text-center">
+                          <div className="rounded-[12px] bg-[#fbf9f8] px-2 py-2">
+                            <p className="text-[10px] font-semibold tracking-[0.8px] text-[#787586]">
+                              Training
+                            </p>
+                            <p className="mt-1 text-[16px] font-bold text-[#1f6b46]">
+                              {client.training}%
+                            </p>
+                          </div>
+                          <div className="rounded-[12px] bg-[#fbf9f8] px-2 py-2">
+                            <p className="text-[10px] font-semibold tracking-[0.8px] text-[#787586]">
+                              Nutrition
+                            </p>
+                            <p className="mt-1 text-[16px] font-bold text-[#1f6b46]">
+                              {client.nutrition}%
+                            </p>
+                          </div>
+                          <div className="rounded-[12px] bg-[#fbf9f8] px-2 py-2">
+                            <p className="text-[10px] font-semibold tracking-[0.8px] text-[#787586]">
+                              Recovery
+                            </p>
+                            <p className="mt-1 text-[16px] font-bold text-[#1f6b46]">
+                              {client.recovery}%
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
