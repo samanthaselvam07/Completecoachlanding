@@ -5,11 +5,14 @@ import {
   applicationTiers,
   checkInIncludesOptions,
   coachTypeOptions,
+  countries,
+  currentToolOptions,
   founderProgramCta,
   founderProgramSections,
   founderProgramPath,
   founderProgramThankYouPath,
   navLinks,
+  weeklyCheckInTimeOptions,
 } from "../src/lib/site";
 
 test("primary CTA points to the founder program", () => {
@@ -44,6 +47,16 @@ test("founder program form covers the required application sections", () => {
   ]);
   assert.ok(coachTypeOptions.includes("Online fitness coach"));
   assert.ok(checkInIncludesOptions.includes("Progress photos"));
+  assert.ok(countries.includes("South Africa"));
+  assert.ok(currentToolOptions.includes("Buffer"));
+  assert.ok(weeklyCheckInTimeOptions.includes("40+ hours"));
+  assert.ok(checkInIncludesOptions.includes("Girth measurements"));
+  assert.ok(checkInIncludesOptions.includes("Training logs"));
+  assert.ok(checkInIncludesOptions.includes("Micronutrients"));
+  assert.equal(
+    (checkInIncludesOptions as readonly string[]).includes("Measurements"),
+    false,
+  );
 });
 
 test("application validation requires design partner feedback call answer", () => {
