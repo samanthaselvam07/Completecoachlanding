@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
 import { SharedNav } from "./shared-nav";
 import { SharedFooter } from "./shared-footer";
@@ -18,10 +15,6 @@ function CheckIcon({ color = "#4f40cf" }: { color?: string }) {
 }
 
 export function PricingPage() {
-  const [annual, setAnnual] = useState(false);
-  const corePrice = annual ? 67 : 79;
-  const scalePrice = annual ? 84 : 99;
-
   return (
     <div className="min-h-screen bg-[#fbf9f8]">
       <SharedNav />
@@ -34,25 +27,6 @@ export function PricingPage() {
         <p className="text-[#474554] text-[17px] md:text-[20px] leading-[30px] max-w-[740px] mx-auto mb-10">
           From client delivery to business growth, powered by AI.
         </p>
-        {/* Billing Toggle */}
-        <div className="flex items-center justify-center gap-4">
-          <span className={`text-[14px] font-semibold ${!annual ? "text-[#1b1c1c]" : "text-[#787586]"}`}>Monthly</span>
-          <button
-            onClick={() => setAnnual((v) => !v)}
-            className="relative w-[70px] h-[34px] rounded-[17px] transition-colors duration-200"
-            style={{ background: annual ? "#4f40cf" : "#c9c7d4" }}
-            aria-label="Toggle billing period"
-          >
-            <span
-              className="absolute top-[5px] size-[24px] rounded-[12px] bg-white shadow-[0px_4px_8px_0px_rgba(27,28,28,0.08)] transition-all duration-200"
-              style={{ left: annual ? "41px" : "5px" }}
-            />
-          </button>
-          <span className={`text-[14px] font-semibold ${annual ? "text-[#1b1c1c]" : "text-[#787586]"}`}>Annual</span>
-          <span className="bg-[#ffd7bf] text-[#753400] text-[11px] font-semibold tracking-[1.1px] px-3 py-1 rounded-[17px]">
-            SAVE 15%
-          </span>
-        </div>
       </section>
 
       {/* Plans */}
@@ -63,7 +37,7 @@ export function PricingPage() {
             <h2 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#1b1c1c] text-[30px] mb-1">Core</h2>
             <p className="text-[#474554] text-[15px] mb-6">Everything you need to coach at a high level</p>
             <div className="flex items-end gap-1 mb-8">
-              <span className="font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-[#1b1c1c] text-[58px] leading-none">${corePrice}</span>
+              <span className="font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-[#1b1c1c] text-[58px] leading-none">$79</span>
               <span className="text-[#787586] text-[16px] font-medium mb-2">/mo</span>
             </div>
             <ul className="space-y-4 mb-10">
@@ -87,7 +61,7 @@ export function PricingPage() {
             <h2 className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-white text-[30px] mb-1">Scale</h2>
             <p className="text-[#b9b5d1] text-[15px] mb-6">Turn your coaching into a scalable business</p>
             <div className="flex items-end gap-1 mb-8">
-              <span className="font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white text-[58px] leading-none">${scalePrice}</span>
+              <span className="font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-white text-[58px] leading-none">$99</span>
               <span className="text-[#b9b5d1] text-[16px] font-medium mb-2">/mo</span>
             </div>
             <ul className="space-y-4 mb-10">
