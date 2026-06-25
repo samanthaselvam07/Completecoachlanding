@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { platformComparisonGroups } from "../src/components/marketing/platform-comparison-section";
-import { createApplicationNotificationEmail } from "../src/lib/application-notification";
+import {
+  applicationNotificationEmail,
+  createApplicationNotificationEmail,
+  sendApplicationNotification,
+} from "../src/lib/application-notification";
 import { applicationInputSchema } from "../src/lib/application-validation";
 import {
   applicationTiers,
@@ -154,4 +158,46 @@ test("application notification email formats submitted fields safely", () => {
   assert.match(html, /Basic Information/);
   assert.match(html, /AI Check-In Analysis/);
   assert.doesNotMatch(html, /Sam <Coach>/);
+});
+
+test("application notifications default to the Complete Coach founder inbox", () => {
+  assert.equal(applicationNotificationEmail, "sammi@completecoach.fit");
+});
+
+test("application notification sends Resend payload to the founder inbox", async () => {
+  const originalApiKey = process.env.RESEND_API_KEY;
+  const originalFrom = process.env.RESEND_FROM_EMAIL;
+  const originalFetch = globalThis.fetch;
+  const calls: Array<{ input: string | URL | Request; init?: RequestInit }> = [];
+
+  process.env.RESEND_API_KEY = "test_resend_key";
+  process.env.RESEND_FROM_EMAIL = "Complete Coach <forms@completecoach.fit>";
+  globalThis.fetch = async (input, init) => {
+    calls.push({ input, init });
+    return new Response(JSON.stringify({ id: "email_test_1" }), { status: 200 });
+  };
+
+  try {
+    const parsed = applicationInputSchema.parse({
+      ...baseApplication,
+      willingToAttendFeedbackCalls: "yes",
+    });
+
+    await sendApplicationNotification(parsed, {
+      id: 43,
+      submitted_at: new Date("2026-06-26T09:30:00.000Z"),
+    });
+  } finally {
+    process.env.RESEND_API_KEY = originalApiKey;
+    process.env.RESEND_FROM_EMAIL = originalFrom;
+    globalThis.fetch = originalFetch;
+  }
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].input, "https://api.resend.com/emails");
+  const payload = JSON.parse(String(calls[0].init?.body));
+  assert.equal(payload.to, "sammi@completecoach.fit");
+  assert.equal(payload.from, "Complete Coach <forms@completecoach.fit>");
+  assert.equal(payload.subject, "New Complete Coach application: Sam Coach");
+  assert.match(payload.html, /NEW FOUNDER PROGRAM APPLICATION/);
 });

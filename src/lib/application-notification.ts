@@ -1,6 +1,7 @@
 import type { ApplicationInput } from "@/lib/application-validation";
 
 const resendEmailsEndpoint = "https://api.resend.com/emails";
+export const applicationNotificationEmail = "sammi@completecoach.fit";
 
 type StoredApplication = {
   id: number;
@@ -171,7 +172,7 @@ export async function sendApplicationNotification(
   application: StoredApplication,
 ) {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.APPLICATION_NOTIFICATION_EMAIL;
+  const to = applicationNotificationEmail;
   const from = process.env.RESEND_FROM_EMAIL;
 
   if (!apiKey || !to || !from) {
