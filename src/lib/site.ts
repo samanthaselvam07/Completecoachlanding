@@ -18,6 +18,7 @@ export const switchTestimonials = [
 
 export const appUrl =
   process.env.NEXT_PUBLIC_APP_URL ?? "https://app.completecoach.fit";
+export const appLoginUrl = `${appUrl.replace(/\/$/, "")}/sign-in`;
 
 export const navLinks = [
   { href: "/features", label: "Features" },

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { appUrl } from "@/lib/site";
+import { appLoginUrl } from "@/lib/site";
 
 export function SharedFooter() {
   return (
@@ -20,7 +20,7 @@ export function SharedFooter() {
         <Link href="/roadmap" className="transition-colors hover:text-[#1b1c1c]">
           Roadmap
         </Link>
-        <a href={appUrl} className="transition-colors hover:text-[#1b1c1c]">
+        <a href={appLoginUrl} className="transition-colors hover:text-[#1b1c1c]">
           Login
         </a>
       </div>

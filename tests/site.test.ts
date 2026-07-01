@@ -8,6 +8,7 @@ import {
 } from "../src/lib/application-notification";
 import { applicationInputSchema } from "../src/lib/application-validation";
 import {
+  appLoginUrl,
   applicationTiers,
   checkInIncludesOptions,
   coachTypeOptions,
@@ -59,6 +60,10 @@ test("navigation keeps public marketing routes available", () => {
     navLinks.map((link) => link.href),
     ["/features", "/pricing", "/roadmap"],
   );
+});
+
+test("landing login links route to the app sign-in page", () => {
+  assert.equal(appLoginUrl, "https://app.completecoach.fit/sign-in");
 });
 
 test("founder program offers both early access tiers", () => {

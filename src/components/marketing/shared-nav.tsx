@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  appUrl,
+  appLoginUrl,
   founderProgramCta,
   founderProgramPath,
   navLinks,
@@ -57,7 +57,7 @@ export function SharedNav({ dark = false }: SharedNavProps) {
               ? "text-white/80 hover:text-white"
               : "text-[#1b1c1c] hover:text-[#4f40cf]"
           }`}
-          href={appUrl}
+          href={appLoginUrl}
         >
           Login
         </a>
