@@ -1,4 +1,5 @@
 import type { ApplicationInput } from "@/lib/application-validation";
+import type { WaitlistInput } from "@/lib/waitlist-validation";
 
 const resendEmailsEndpoint = "https://api.resend.com/emails";
 export const applicationNotificationEmail = "sammi@completecoach.fit";
@@ -6,6 +7,11 @@ export const applicationNotificationEmail = "sammi@completecoach.fit";
 type StoredApplication = {
   id: number;
   submitted_at: Date;
+};
+
+type StoredWaitlistSignup = {
+  id: string;
+  email: string;
 };
 
 type EmailSection = {
@@ -167,16 +173,59 @@ export function createApplicationNotificationEmail(
   `;
 }
 
-export async function sendApplicationNotification(
-  input: ApplicationInput,
-  application: StoredApplication,
+export function createWaitlistNotificationEmail(
+  input: WaitlistInput,
+  signup: StoredWaitlistSignup,
 ) {
+  const sections = [
+    renderSection({
+      title: "Waitlist Signup",
+      rows: [
+        ["Email Address", input.email],
+        ["Source", input.source],
+        ["Signup ID", signup.id],
+      ],
+    }),
+  ].join("");
+
+  return `
+    <!doctype html>
+    <html lang="en">
+      <body style="margin: 0; padding: 0; background: #fbf9f8; font-family: Arial, sans-serif;">
+        <main style="max-width: 760px; margin: 0 auto; padding: 32px 18px;">
+          <div style="border-radius: 24px; background: #ffffff; padding: 28px; box-shadow: 0 12px 28px rgba(27, 28, 28, 0.08);">
+            <p style="display: inline-block; margin: 0 0 14px; border-radius: 18px; background: #f2eeff; padding: 8px 12px; color: #4f40cf; font-size: 12px; font-weight: 700; letter-spacing: 1px;">
+              NEW WAITLIST SIGNUP
+            </p>
+            <h1 style="margin: 0; color: #1b1c1c; font-size: 28px; line-height: 34px;">
+              ${escapeHtml(signup.email)} joined the Complete Coach waitlist
+            </h1>
+            <p style="margin: 12px 0 0; color: #474554; font-size: 15px; line-height: 24px;">
+              A new coach has joined the early access waitlist.
+            </p>
+            ${sections}
+          </div>
+        </main>
+      </body>
+    </html>
+  `;
+}
+
+async function sendNotificationEmail({
+  html,
+  missingEnvMessage,
+  subject,
+}: {
+  html: string;
+  missingEnvMessage: string;
+  subject: string;
+}) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = applicationNotificationEmail;
   const from = process.env.RESEND_FROM_EMAIL;
 
   if (!apiKey || !to || !from) {
-    console.warn("Application notification email skipped; Resend env vars are not configured.");
+    console.warn(missingEnvMessage);
     return;
   }
 
@@ -184,8 +233,8 @@ export async function sendApplicationNotification(
     body: JSON.stringify({
       from,
       to,
-      subject: `New Complete Coach application: ${input.fullName}`,
-      html: createApplicationNotificationEmail(input, application),
+      subject,
+      html,
     }),
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -198,4 +247,28 @@ export async function sendApplicationNotification(
     const errorBody = await response.text().catch(() => "");
     throw new Error(`Resend notification failed with ${response.status}: ${errorBody}`);
   }
+}
+
+export async function sendApplicationNotification(
+  input: ApplicationInput,
+  application: StoredApplication,
+) {
+  await sendNotificationEmail({
+    html: createApplicationNotificationEmail(input, application),
+    missingEnvMessage:
+      "Application notification email skipped; Resend env vars are not configured.",
+    subject: `New Complete Coach application: ${input.fullName}`,
+  });
+}
+
+export async function sendWaitlistNotification(
+  input: WaitlistInput,
+  signup: StoredWaitlistSignup,
+) {
+  await sendNotificationEmail({
+    html: createWaitlistNotificationEmail(input, signup),
+    missingEnvMessage:
+      "Waitlist notification email skipped; Resend env vars are not configured.",
+    subject: `New Complete Coach waitlist signup: ${signup.email}`,
+  });
 }

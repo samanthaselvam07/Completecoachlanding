@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { upsertWaitlistSignup } from "@/lib/waitlist-repository";
+import { sendWaitlistNotification } from "@/lib/application-notification";
 import { waitlistInputSchema } from "@/lib/waitlist-validation";
 
 export const runtime = "nodejs";
@@ -33,6 +34,12 @@ export async function POST(request: Request) {
       userAgent: request.headers.get("user-agent"),
       referer: request.headers.get("referer"),
     });
+
+    try {
+      await sendWaitlistNotification(parsed.data, signup);
+    } catch (notificationError) {
+      console.error("Failed to send waitlist signup notification", notificationError);
+    }
 
     return NextResponse.json(
       {

@@ -4,7 +4,9 @@ import { platformComparisonGroups } from "../src/components/marketing/platform-c
 import {
   applicationNotificationEmail,
   createApplicationNotificationEmail,
+  createWaitlistNotificationEmail,
   sendApplicationNotification,
+  sendWaitlistNotification,
 } from "../src/lib/application-notification";
 import { applicationInputSchema } from "../src/lib/application-validation";
 import { waitlistInputSchema } from "../src/lib/waitlist-validation";
@@ -177,6 +179,24 @@ test("application notification email formats submitted fields safely", () => {
   assert.doesNotMatch(html, /Sam <Coach>/);
 });
 
+test("waitlist notification email uses the existing Complete Coach template style", () => {
+  const parsed = waitlistInputSchema.parse({
+    email: "  COACH+LEAD@EXAMPLE.COM ",
+    source: "completecoach.fit",
+  });
+
+  const html = createWaitlistNotificationEmail(parsed, {
+    id: "waitlist_42",
+    email: parsed.email,
+  });
+
+  assert.match(html, /NEW WAITLIST SIGNUP/);
+  assert.match(html, /coach\+lead@example\.com joined the Complete Coach waitlist/);
+  assert.match(html, /Waitlist Signup/);
+  assert.match(html, /completecoach\.fit/);
+  assert.match(html, /waitlist_42/);
+});
+
 test("application notifications default to the Complete Coach founder inbox", () => {
   assert.equal(applicationNotificationEmail, "sammi@completecoach.fit");
 });
@@ -217,4 +237,42 @@ test("application notification sends Resend payload to the founder inbox", async
   assert.equal(payload.from, "Complete Coach <forms@completecoach.fit>");
   assert.equal(payload.subject, "New Complete Coach application: Sam Coach");
   assert.match(payload.html, /NEW FOUNDER PROGRAM APPLICATION/);
+});
+
+test("waitlist notification sends Resend payload to the founder inbox", async () => {
+  const originalApiKey = process.env.RESEND_API_KEY;
+  const originalFrom = process.env.RESEND_FROM_EMAIL;
+  const originalFetch = globalThis.fetch;
+  const calls: Array<{ input: string | URL | Request; init?: RequestInit }> = [];
+
+  process.env.RESEND_API_KEY = "test_resend_key";
+  process.env.RESEND_FROM_EMAIL = "Complete Coach <forms@completecoach.fit>";
+  globalThis.fetch = async (input, init) => {
+    calls.push({ input, init });
+    return new Response(JSON.stringify({ id: "email_test_2" }), { status: 200 });
+  };
+
+  try {
+    const parsed = waitlistInputSchema.parse({
+      email: "coach@example.com",
+      source: "completecoach.fit",
+    });
+
+    await sendWaitlistNotification(parsed, {
+      id: "waitlist_43",
+      email: parsed.email,
+    });
+  } finally {
+    process.env.RESEND_API_KEY = originalApiKey;
+    process.env.RESEND_FROM_EMAIL = originalFrom;
+    globalThis.fetch = originalFetch;
+  }
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].input, "https://api.resend.com/emails");
+  const payload = JSON.parse(String(calls[0].init?.body));
+  assert.equal(payload.to, "sammi@completecoach.fit");
+  assert.equal(payload.from, "Complete Coach <forms@completecoach.fit>");
+  assert.equal(payload.subject, "New Complete Coach waitlist signup: coach@example.com");
+  assert.match(payload.html, /NEW WAITLIST SIGNUP/);
 });
