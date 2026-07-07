@@ -6,18 +6,18 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://completecoach.fit";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Complete Coach | Coach smarter. Scale faster.",
+    default: "Complete Coach | Join the Waitlist",
     template: "%s | Complete Coach",
   },
   description:
-    "Complete Coach combines AI-powered check-in analysis, client management, and business systems into one coaching platform.",
+    "Complete Coach is the AI-powered coaching OS for online fitness coaches. Join the waitlist for early access and founding member pricing.",
   icons: {
     icon: "/brand/favicon.svg",
   },
   openGraph: {
     title: "Complete Coach",
     description:
-      "AI-powered coaching software for client delivery, operations, and growth.",
+      "Join the Complete Coach waitlist for early access to the AI-powered coaching OS for online fitness coaches.",
     url: siteUrl,
     siteName: "Complete Coach",
     images: [
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Complete Coach",
     description:
-      "AI-powered coaching software for client delivery, operations, and growth.",
+      "Join the Complete Coach waitlist for early access and founding member pricing.",
     images: ["/images/home-1.png"],
   },
 };

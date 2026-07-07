@@ -7,6 +7,7 @@ import {
   sendApplicationNotification,
 } from "../src/lib/application-notification";
 import { applicationInputSchema } from "../src/lib/application-validation";
+import { waitlistInputSchema } from "../src/lib/waitlist-validation";
 import {
   appLoginUrl,
   applicationTiers,
@@ -53,6 +54,17 @@ test("primary CTA points to the founder program", () => {
   assert.equal(founderProgramCta, "Join Founder Program");
   assert.equal(founderProgramPath, "/founder-program");
   assert.equal(founderProgramThankYouPath, "/founder-program/thank-you");
+});
+
+test("waitlist validation normalizes coach emails", () => {
+  const parsed = waitlistInputSchema.parse({
+    email: "  SAM@EXAMPLE.COM ",
+    source: "completecoach.fit",
+  });
+
+  assert.equal(parsed.email, "sam@example.com");
+  assert.equal(parsed.source, "completecoach.fit");
+  assert.equal(waitlistInputSchema.safeParse({ email: "not-an-email" }).success, false);
 });
 
 test("navigation keeps public marketing routes available", () => {

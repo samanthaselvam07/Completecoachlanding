@@ -1,5 +1,5 @@
-import { HomePage } from "@/components/marketing/home-page";
+import { WaitlistPage } from "@/components/marketing/waitlist-page";
 
 export default function Page() {
-  return <HomePage />;
+  return <WaitlistPage />;
 }
