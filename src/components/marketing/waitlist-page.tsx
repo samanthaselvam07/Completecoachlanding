@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useId, useState } from "react";
+import { appLoginUrl } from "@/lib/site";
 
 type SubmissionState = "idle" | "submitting" | "success" | "error";
 
@@ -225,8 +226,14 @@ export function WaitlistPage() {
         />
         <div className="relative mx-auto grid min-h-[92svh] w-full max-w-7xl content-center gap-12 py-10 lg:grid-cols-[0.95fr_0.8fr] lg:items-center">
           <div>
-            <div className="mb-12">
+            <div className="mb-12 flex flex-wrap items-center justify-between gap-5">
               <BrandLockup />
+              <a
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/16 bg-white/10 px-5 text-sm font-black text-white shadow-[0_18px_50px_rgba(0,0,0,0.14)] transition hover:-translate-y-0.5 hover:bg-white/16 focus:outline-none focus:ring-4 focus:ring-white/18"
+                href={appLoginUrl}
+              >
+                Log in
+              </a>
             </div>
             <p className="mb-5 inline-flex rounded-full border border-white/12 bg-white/8 px-4 py-2 text-sm font-black text-[#ffc36a]">
               Early access waitlist
